@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FormularioActivity">
+    tools:context=".ui.FormularioActivity">
 
     <ImageView
         android:id="@+id/imagem_add_cliente"
@@ -28,6 +28,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/nome_add_cliente"
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -47,6 +48,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edereco_add_cliente"
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -65,6 +67,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email_add_cliente"
+            android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -84,6 +87,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/telefone_add_cliente"
+            android:inputType="phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"

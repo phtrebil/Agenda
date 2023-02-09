@@ -1,11 +1,12 @@
-package br.com.pedro.agenda
+package br.com.pedro.agenda.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import br.com.pedro.agenda.R
 
-class DetalhesActivity : AppCompatActivity() {
+class ListaDeClientesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detalhes)
+        setContentView(R.layout.lista_de_clientes_main)
     }
 }
