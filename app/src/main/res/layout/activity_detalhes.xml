@@ -33,14 +33,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/titulo_endereco"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/endere_o"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="@id/titulo_nome"
-                app:layout_constraintTop_toBottomOf="@+id/titulo_nome" />
 
             <TextView
                 android:id="@+id/titulo_nome"
@@ -53,13 +45,78 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/email"
+                android:id="@+id/nome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/titulo_nome"
+                app:layout_constraintTop_toTopOf="@+id/titulo_nome"
+                tools:text="Pedro Trebilcock" />
+
+
+            <TextView
+                android:id="@+id/titulo_endereco"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/endere_o"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@id/titulo_nome"
+                app:layout_constraintTop_toBottomOf="@+id/titulo_nome"
+                />
+
+            <TextView
+                android:id="@+id/endereco"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                app:layout_constraintTop_toBottomOf="@id/nome"
+                app:layout_constraintStart_toStartOf="@id/nome"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Rua José Motta, nª252"/>
+
+
+            <TextView
+                android:id="@+id/titulo_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/e_mail"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="@id/titulo_endereco"
                 app:layout_constraintTop_toBottomOf="@+id/titulo_endereco" />
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/titulo_email"
+                app:layout_constraintTop_toBottomOf="@id/endereco"
+                tools:text="jhpere@gmail.com" />
+
+
+            <TextView
+                android:id="@+id/titulo_telefone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Telefone:"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@id/titulo_email"
+                app:layout_constraintTop_toBottomOf="@id/titulo_email"
+                />
+            <TextView
+                android:id="@+id/telefone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/titulo_telefone"
+                app:layout_constraintTop_toBottomOf="@id/email"
+                tools:text="(11)98765-0987"/>
+
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
