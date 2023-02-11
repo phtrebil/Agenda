@@ -13,9 +13,5 @@ abstract class ClienteDatabase : RoomDatabase() {
 
     abstract fun clienteDatabase(): ClienteDao
 
-    open fun getInstance(context: Context?): ClienteDatabase? {
-        return databaseBuilder(context!!, ClienteDatabase::class.java, "Agenda.db")
-            .allowMainThreadQueries()
-            .build()
-    }
+
 }

@@ -1,27 +1,43 @@
 package br.com.pedro.agenda.ui.adapter
 
-import android.os.Parcel
-import android.os.Parcelable
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import br.com.pedro.agenda.ui.adapter.ListaDeCLientesAdapter.*
+import br.com.pedro.agenda.databinding.ItemListaClientesBinding
+import br.com.pedro.agenda.model.Cliente
+import br.com.pedro.agenda.ui.adapter.ListaDeCLientesAdapter.ViewHolder
 
-class ListaDeCLientesAdapter() : RecyclerView.Adapter<ViewHolder>() {
+class ListaDeCLientesAdapter(
 
-    class ViewHolder(): RecyclerView.ViewHolder() {
+    private val context: Context,
+    clientes: List<Cliente> = emptyList(),
+
+    ) : RecyclerView.Adapter<ViewHolder>() {
+
+    private val clientes = clientes.toMutableList()
+
+    inner class ViewHolder(
+        private val binding: ItemListaClientesBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun vincula(cliente: Cliente) {
+            binding.nomeItem.text = cliente.nome
+            binding.telefoneItem.text = cliente.telefone
+        }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("Not yet implemented")
+        val inflater = LayoutInflater.from(context)
+        return ViewHolder(ItemListaClientesBinding.inflate(inflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val cliente = clientes[position]
+        holder.vincula(cliente)
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+    override fun getItemCount(): Int = clientes.size
     }
 
-}
