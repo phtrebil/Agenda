@@ -24,11 +24,22 @@ class ListaDeClientesActivity : AppCompatActivity() {
 
         val db = Room.databaseBuilder(
             this,
-            ClienteDatabase::class.java, "database-name"
-        ).build()
+            ClienteDatabase::class.java, "Cliente.db"
+        ).allowMainThreadQueries().build()
 
         carregaRecyclerView()
         configuraFab()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val db = Room.databaseBuilder(
+            this,
+            ClienteDatabase::class.java, "Cliente.db"
+        ).allowMainThreadQueries().build()
+
+        adapter.atualiza(db.clienteDatabase().getAll())
     }
 
 
