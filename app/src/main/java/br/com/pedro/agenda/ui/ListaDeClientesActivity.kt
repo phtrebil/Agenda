@@ -1,12 +1,10 @@
 package br.com.pedro.agenda.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View.OnClickListener
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
-import br.com.pedro.agenda.R
 import br.com.pedro.agenda.dao.ClienteDatabase
 import br.com.pedro.agenda.databinding.ActivityListaDeClientesBinding
 import br.com.pedro.agenda.ui.adapter.ListaDeCLientesAdapter
@@ -53,5 +51,18 @@ class ListaDeClientesActivity : AppCompatActivity() {
         val recyclerView = binding.rvListaDeAlunos
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+        val db = Room.databaseBuilder(
+            this,
+            ClienteDatabase::class.java, "Cliente.db"
+        ).allowMainThreadQueries().build()
+
+        adapter.quandoSeguraItem = {
+            val db = Room.databaseBuilder(
+                this,
+                ClienteDatabase::class.java, "Cliente.db"
+            ).allowMainThreadQueries().build()
+            db.clienteDatabase().delete(it)
+            adapter.atualiza(db.clienteDatabase().getAll())
+        }
     }
 }

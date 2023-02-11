@@ -1,18 +1,24 @@
 package br.com.pedro.agenda.ui.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnLongClickListener
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
+import br.com.pedro.agenda.dao.ClienteDatabase
 import br.com.pedro.agenda.databinding.ItemListaClientesBinding
 import br.com.pedro.agenda.model.Cliente
 import br.com.pedro.agenda.ui.adapter.ListaDeCLientesAdapter.ViewHolder
 
 class ListaDeCLientesAdapter(
 
+
     private val context: Context,
     clientes: List<Cliente> = emptyList(),
+    var quandoSeguraItem: (cliente: Cliente) -> Unit = {}
 
     ) : RecyclerView.Adapter<ViewHolder>() {
 
@@ -21,7 +27,18 @@ class ListaDeCLientesAdapter(
     inner class ViewHolder(
         private val binding: ItemListaClientesBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+
+        private lateinit var cliente: Cliente
+
+        init {
+            itemView.setOnLongClickListener(View.OnLongClickListener {
+                quandoSeguraItem(cliente)
+                true
+            })
+        }
+
         fun vincula(cliente: Cliente) {
+            this.cliente = cliente
             binding.nomeItem.text = cliente.nome
             binding.telefoneItem.text = cliente.telefone
         }
