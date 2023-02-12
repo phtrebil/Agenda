@@ -18,7 +18,8 @@ class ListaDeCLientesAdapter(
 
     private val context: Context,
     clientes: List<Cliente> = emptyList(),
-    var quandoSeguraItem: (cliente: Cliente) -> Unit = {}
+    var quandoSeguraItem: (cliente: Cliente) -> Unit = {},
+    var quandoClicaItem: (cliente: Cliente) -> Unit = {}
 
     ) : RecyclerView.Adapter<ViewHolder>() {
 
@@ -35,6 +36,12 @@ class ListaDeCLientesAdapter(
                 quandoSeguraItem(cliente)
                 true
             })
+            
+            itemView.setOnClickListener {
+                if(::cliente.isInitialized){
+                    quandoClicaItem(cliente)
+                }
+            }
         }
 
         fun vincula(cliente: Cliente) {

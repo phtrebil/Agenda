@@ -22,6 +22,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         app:layout_constraintEnd_toEndOf="@id/imagem_add_cliente"
         app:layout_constraintStart_toStartOf="@id/imagem_add_cliente"
         app:layout_constraintTop_toBottomOf="@id/imagem_add_cliente">
@@ -31,7 +32,6 @@
             android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
             android:hint="@string/nome"
 
             />
@@ -42,6 +42,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         app:layout_constraintEnd_toEndOf="@id/nome_outlinedTextField"
         app:layout_constraintStart_toStartOf="@id/nome_outlinedTextField"
         app:layout_constraintTop_toBottomOf="@id/nome_outlinedTextField">
@@ -51,7 +52,6 @@
             android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
             android:hint="@string/endere_o"
 
             />
@@ -61,6 +61,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         app:layout_constraintEnd_toEndOf="@id/endereco_outlinedTextField"
         app:layout_constraintStart_toStartOf="@id/endereco_outlinedTextField"
         app:layout_constraintTop_toBottomOf="@id/endereco_outlinedTextField">
@@ -70,7 +71,6 @@
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
             android:hint="@string/e_mail"
 
             />
@@ -81,6 +81,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         app:layout_constraintEnd_toEndOf="@id/email_outlinedTextField"
         app:layout_constraintStart_toStartOf="@id/email_outlinedTextField"
         app:layout_constraintTop_toBottomOf="@id/email_outlinedTextField">
@@ -90,7 +91,6 @@
             android:inputType="phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
             android:hint="Telefone"
 
             />

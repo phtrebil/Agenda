@@ -64,5 +64,12 @@ class ListaDeClientesActivity : AppCompatActivity() {
             db.clienteDatabase().delete(it)
             adapter.atualiza(db.clienteDatabase().getAll())
         }
+        adapter.quandoClicaItem = {
+            val intent = Intent(this, DetalhesActivity::class.java)
+                .apply {
+                    putExtra("cliente", it)
+                }
+            startActivity(intent)
+        }
     }
 }
