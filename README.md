@@ -3,7 +3,7 @@
 Aplicativo de agenda para salvar dados de clientes no celular.
 
 O app utiliza listas com o recyclerView que, inicialmente, traz as informações de nome e telefone do cliente.
-Foram implementadas, com o Room, as funções de criação, edicão, exclusão e leitura de cada item da lista. 
+Foram implementadas, com o Room, as funções de criação, edicão, exclusão e leitura de cada item da lista (falta implementar AsyncTask, para evitar risco de travamentos).
 Ao clicar no item, abre-se a tela de detalhes, que mostra as informções completas do cliente (nome, endereço, telefone e email). 
 O aplicativo também foi utilizado para testar a implementação de diferentes funções conforme o click que o usário faz. Assim, caso haja um longo click, o app fará uma função; caso haja click simples, será outro, conforme explicado abaixo.
 
