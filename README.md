@@ -83,3 +83,13 @@ A Implementar
 
 -  Clicar na imagem para adicionar foto do cliente.
 
+
+<h1 align="center"> Vitrine.dev </h1>
+
+| :placard: Vitrine.Dev |     |
+| -------------  | --- |
+| :sparkles: Nome        | **Agenda de Clientes**
+| :label: Tecnologias | kotlin, room, recyclerView
+| :rocket: URL         | https://github.com/phtrebil/Agenda
+| :fire: Desafio     | https://github.com/phtrebil/Agenda
+
