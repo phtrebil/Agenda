@@ -8,13 +8,10 @@ interface ClienteDao {
     @Query("SELECT * FROM cliente")
     fun getAll(): List<Cliente>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg clientes: Cliente)
 
     @Delete
     fun delete(cliente: Cliente)
-
-    @Update
-    fun Update(cliente: Cliente)
 
 }
