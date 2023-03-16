@@ -6,6 +6,7 @@
     <item
         android:id="@+id/menu_formulario_salvar"
         android:title="Salvar"
+        android:icon="@drawable/baseline_save_24"
         app:showAsAction="always"
         />
 

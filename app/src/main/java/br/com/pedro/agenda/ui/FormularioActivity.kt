@@ -11,7 +11,7 @@ import br.com.pedro.agenda.R
 import br.com.pedro.agenda.dao.ClienteDatabase
 import br.com.pedro.agenda.databinding.ActivityFormularioBinding
 import br.com.pedro.agenda.model.Cliente
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -32,6 +32,7 @@ class FormularioActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setTitle("Salvar Cliente")
         val dadosRecebidos = intent
         if (dadosRecebidos.hasExtra("cliente2")) {
             intent.getParcelableExtra<Cliente>("cliente2")?.let { clienteDetalhes ->
@@ -64,7 +65,7 @@ class FormularioActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.menu_formulario_salvar -> {
                 criarCliente()
-                finish()
+                startActivity(Intent(baseContext, ListaDeClientesActivity::class.java))
                 true
             }
             else -> return super.onOptionsItemSelected(item)
@@ -78,7 +79,7 @@ class FormularioActivity : AppCompatActivity() {
         val email = binding.emailAddCliente.text.toString()
         var telefone = binding.telefoneAddCliente.text.toString()
         scope.launch {
-            withContext(Dispatchers.IO) {
+            withContext(IO) {
                 repository.insertAll(
                     Cliente(
                         cliente.id,
@@ -91,7 +92,6 @@ class FormularioActivity : AppCompatActivity() {
             }
 
         }
-        startActivity(Intent(this, ListaDeClientesActivity::class.java))
 
     }
 }
