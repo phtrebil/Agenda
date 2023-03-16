@@ -20,11 +20,6 @@ class ListaDeClientesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val db = Room.databaseBuilder(
-            this,
-            ClienteDatabase::class.java, "Cliente.db"
-        ).allowMainThreadQueries().build()
-
         carregaRecyclerView()
         configuraFab()
     }
