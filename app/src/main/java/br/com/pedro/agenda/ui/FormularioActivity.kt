@@ -12,6 +12,7 @@ import br.com.pedro.agenda.dao.ClienteDatabase
 import br.com.pedro.agenda.databinding.ActivityFormularioBinding
 import br.com.pedro.agenda.model.Cliente
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -78,20 +79,30 @@ class FormularioActivity : AppCompatActivity() {
         val endereco = binding.ederecoAddCliente.text.toString()
         val email = binding.emailAddCliente.text.toString()
         var telefone = binding.telefoneAddCliente.text.toString()
-        scope.launch {
-            withContext(IO) {
-                repository.insertAll(
-                    Cliente(
-                        cliente.id,
-                        nome,
-                        endereco,
-                        email,
-                        telefone
-                    )
-                )
-            }
+        scope.launch() {
+            salvaCliente(nome, endereco, email, telefone)
 
         }
 
     }
+
+    private suspend fun salvaCliente(
+        nome: String,
+        endereco: String,
+        email: String,
+        telefone: String
+    ) {
+        withContext(IO) {
+            repository.insertAll(
+                Cliente(
+                    cliente.id,
+                    nome,
+                    endereco,
+                    email,
+                    telefone
+                )
+            )
+        }
+    }
+
 }

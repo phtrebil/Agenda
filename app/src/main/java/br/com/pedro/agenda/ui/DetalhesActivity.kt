@@ -49,7 +49,6 @@ class DetalhesActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.menu_detalhes_editar -> {
-                Toast.makeText(this, "item editar clicado", Toast.LENGTH_SHORT).show()
                 vaiParaFormulario()
                 true
             }

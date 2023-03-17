@@ -9,6 +9,7 @@ import br.com.pedro.agenda.databinding.ActivityListaDeClientesBinding
 import br.com.pedro.agenda.model.Cliente
 import br.com.pedro.agenda.ui.adapter.ListaDeCLientesAdapter
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -36,13 +37,18 @@ class ListaDeClientesActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        scope.launch {
-            val clientes = withContext(IO){
-                repository.getAll()
-            }
+        scope.launch() {
+            val clientes = geraLista()
             adapter.atualiza(clientes)
         }
 
+    }
+
+    private suspend fun geraLista(): List<Cliente> {
+        val clientes = withContext(IO) {
+            repository.getAll()
+        }
+        return clientes
     }
 
 
@@ -60,11 +66,8 @@ class ListaDeClientesActivity : AppCompatActivity() {
 
         adapter.quandoSeguraItem = {
 
-            scope.launch {
-                withContext(IO){
-                    repository.delete(it)
-                    listaDeClientes = repository.getAll()
-                }
+            scope.launch() {
+                deletaCliente(it)
             }
             adapter.atualiza(listaDeClientes)
         }
@@ -76,4 +79,12 @@ class ListaDeClientesActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    private suspend fun deletaCliente(it: Cliente) {
+        withContext(IO) {
+            repository.delete(it)
+            listaDeClientes = repository.getAll()
+        }
+    }
+
 }
