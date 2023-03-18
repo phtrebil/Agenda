@@ -1,4 +1,4 @@
-package br.com.pedro.agenda.ui
+package br.com.pedro.agenda.ui.activity
 
 import android.content.Intent
 import android.os.Bundle

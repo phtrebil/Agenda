@@ -1,4 +1,4 @@
-package br.com.pedro.agenda.ui
+package br.com.pedro.agenda.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,7 +12,6 @@ import br.com.pedro.agenda.dao.ClienteDatabase
 import br.com.pedro.agenda.databinding.ActivityFormularioBinding
 import br.com.pedro.agenda.model.Cliente
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

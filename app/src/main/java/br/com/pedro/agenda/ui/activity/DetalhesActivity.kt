@@ -1,4 +1,4 @@
-package br.com.pedro.agenda.ui
+package br.com.pedro.agenda.ui.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.Toast
 import br.com.pedro.agenda.R
 import br.com.pedro.agenda.databinding.ActivityDetalhesBinding
 import br.com.pedro.agenda.model.Cliente
