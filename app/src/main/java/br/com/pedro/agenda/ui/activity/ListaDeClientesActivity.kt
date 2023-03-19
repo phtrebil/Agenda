@@ -3,13 +3,15 @@ package br.com.pedro.agenda.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.pedro.agenda.dao.ClienteDatabase
 import br.com.pedro.agenda.databinding.ActivityListaDeClientesBinding
 import br.com.pedro.agenda.model.Cliente
 import br.com.pedro.agenda.ui.adapter.ListaDeCLientesAdapter
+import br.com.pedro.agenda.ui.viewmodel.ListaDeClientesViewModel
+import br.com.pedro.agenda.ui.viewmodel.factory.ListaDeClientesFactory
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -22,10 +24,12 @@ class ListaDeClientesActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivityListaDeClientesBinding.inflate(layoutInflater)
     }
-    private val repository by lazy {
-        ClienteDatabase.instancia(this).clienteDatabase()
+    private val viewModel by lazy {
+        val db = ClienteDatabase.instancia(this)
+        val factory = ListaDeClientesFactory(db)
+        val provider = ViewModelProviders.of(this, factory)
+        provider.get(ListaDeClientesViewModel::class.java)
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +37,8 @@ class ListaDeClientesActivity : AppCompatActivity() {
 
         carregaRecyclerView()
         configuraFab()
+
+
     }
 
     override fun onResume() {
@@ -46,7 +52,7 @@ class ListaDeClientesActivity : AppCompatActivity() {
 
     private suspend fun geraLista(): List<Cliente> {
         val clientes = withContext(IO) {
-            repository.getAll()
+            viewModel.getAll()
         }
         return clientes
     }
@@ -82,9 +88,11 @@ class ListaDeClientesActivity : AppCompatActivity() {
 
     private suspend fun deletaCliente(it: Cliente) {
         withContext(IO) {
-            repository.delete(it)
-            listaDeClientes = repository.getAll()
+            viewModel.delete(it)
+            listaDeClientes = viewModel.getAll()
+            adapter.atualiza(listaDeClientes)
         }
+
     }
 
 }

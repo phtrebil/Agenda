@@ -46,10 +46,6 @@ dependencies {
 
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
 
-    //injeção de dependências com koin
-    implementation 'org.koin:koin-android:2.0.0-rc-2'
-    implementation 'org.koin:koin-android-viewmodel:2.0.0-rc-2'
-
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.0'
