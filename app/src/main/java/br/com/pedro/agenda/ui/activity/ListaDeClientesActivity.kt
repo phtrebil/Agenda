@@ -51,10 +51,12 @@ class ListaDeClientesActivity : AppCompatActivity() {
     }
 
     private suspend fun geraLista(): List<Cliente> {
-        val clientes = withContext(IO) {
-            viewModel.getAll()
+        withContext(IO) {
+            viewModel.getAll().observe(this@ListaDeClientesActivity) {
+                listaDeClientes = it
+            }
         }
-        return clientes
+        return listaDeClientes
     }
 
 
@@ -89,7 +91,10 @@ class ListaDeClientesActivity : AppCompatActivity() {
     private suspend fun deletaCliente(it: Cliente) {
         withContext(IO) {
             viewModel.delete(it)
-            listaDeClientes = viewModel.getAll()
+            viewModel.getAll().observe(this@ListaDeClientesActivity) {
+                listaDeClientes = it
+
+            }
             adapter.atualiza(listaDeClientes)
         }
 
