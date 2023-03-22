@@ -1,6 +1,5 @@
 package br.com.pedro.agenda.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import br.com.pedro.agenda.model.Cliente
 
@@ -10,7 +9,7 @@ interface ClienteDao {
     fun getAll(): List<Cliente>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg clientes: Cliente)
+    fun salvar(vararg clientes: Cliente)
 
     @Delete
     fun delete(cliente: Cliente)

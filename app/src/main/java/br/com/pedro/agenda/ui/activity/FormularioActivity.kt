@@ -7,10 +7,14 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import br.com.pedro.agenda.R
 import br.com.pedro.agenda.dao.ClienteDatabase
 import br.com.pedro.agenda.databinding.ActivityFormularioBinding
 import br.com.pedro.agenda.model.Cliente
+import br.com.pedro.agenda.ui.viewmodel.FormularioViewModel
+import br.com.pedro.agenda.ui.viewmodel.factory.FormularioFactory
+import br.com.pedro.agenda.ui.viewmodel.factory.ListaDeClientesFactory
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -25,8 +29,11 @@ class FormularioActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivityFormularioBinding.inflate(layoutInflater)
     }
-    private val repository by lazy {
-        ClienteDatabase.instancia(this).clienteDatabase()
+    private val viewModel by lazy {
+        val db = ClienteDatabase.instancia(this)
+        val factory = FormularioFactory(db)
+        val provider = ViewModelProviders.of(this, factory)
+        provider.get(FormularioViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +48,7 @@ class FormularioActivity : AppCompatActivity() {
                 cliente = clienteDetalhes
             }
         }
+
 
     }
 
@@ -92,7 +100,7 @@ class FormularioActivity : AppCompatActivity() {
         telefone: String
     ) {
         withContext(IO) {
-            repository.insertAll(
+            viewModel.salvar(
                 Cliente(
                     cliente.id,
                     nome,
