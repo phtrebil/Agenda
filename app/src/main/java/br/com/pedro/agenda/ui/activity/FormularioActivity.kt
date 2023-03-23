@@ -8,15 +8,14 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
 import br.com.pedro.agenda.R
 import br.com.pedro.agenda.dao.ClienteDatabase
 import br.com.pedro.agenda.databinding.ActivityFormularioBinding
 import br.com.pedro.agenda.model.Cliente
 import br.com.pedro.agenda.ui.viewmodel.FormularioViewModel
 import br.com.pedro.agenda.ui.viewmodel.factory.FormularioFactory
-import br.com.pedro.agenda.ui.viewmodel.factory.ListaDeClientesFactory
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -24,7 +23,6 @@ import kotlinx.coroutines.withContext
 class FormularioActivity : AppCompatActivity() {
 
 
-    private val scope = MainScope()
     private var cliente = Cliente(0, "", "", "", "")
     private val binding by lazy {
         ActivityFormularioBinding.inflate(layoutInflater)
@@ -48,8 +46,6 @@ class FormularioActivity : AppCompatActivity() {
                 cliente = clienteDetalhes
             }
         }
-
-
     }
 
     private fun preencheCampo(cliente: Cliente) {
@@ -86,7 +82,7 @@ class FormularioActivity : AppCompatActivity() {
         val endereco = binding.ederecoAddCliente.text.toString()
         val email = binding.emailAddCliente.text.toString()
         var telefone = binding.telefoneAddCliente.text.toString()
-        scope.launch() {
+        lifecycleScope.launch() {
             salvaCliente(nome, endereco, email, telefone)
 
         }

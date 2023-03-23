@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.pedro.agenda.dao.ClienteDatabase
 import br.com.pedro.agenda.databinding.ActivityListaDeClientesBinding
@@ -19,7 +20,6 @@ import kotlinx.coroutines.withContext
 class ListaDeClientesActivity : AppCompatActivity() {
 
     private var listaDeClientes: List<Cliente> = emptyList()
-    private val scope = MainScope()
     private val adapter = ListaDeCLientesAdapter(this)
     private val binding by lazy {
         ActivityListaDeClientesBinding.inflate(layoutInflater)
@@ -43,7 +43,7 @@ class ListaDeClientesActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        scope.launch() {
+        lifecycleScope.launch() {
             val clientes = geraLista()
             adapter.atualiza(clientes)
         }
@@ -73,7 +73,7 @@ class ListaDeClientesActivity : AppCompatActivity() {
 
         adapter.quandoSeguraItem = {
 
-            scope.launch() {
+            lifecycleScope.launch() {
                 deletaCliente(it)
             }
             adapter.atualiza(listaDeClientes)
