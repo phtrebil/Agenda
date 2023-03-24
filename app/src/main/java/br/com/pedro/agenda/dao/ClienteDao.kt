@@ -10,9 +10,9 @@ interface ClienteDao {
     fun getAll(): Flow<List<Cliente>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun salvar(vararg clientes: Cliente)
+    suspend fun salvar(vararg clientes: Cliente)
 
     @Delete
-    fun delete(cliente: Cliente)
+    suspend fun delete(cliente: Cliente)
 
 }

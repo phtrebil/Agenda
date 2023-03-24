@@ -8,7 +8,7 @@ class FormularioViewModel(
     private val repository: ClienteDatabase
 ):ViewModel() {
 
-    fun salvar(cliente: Cliente) {
+    suspend fun salvar(cliente: Cliente) {
         repository.clienteDatabase().salvar(cliente)
     }
 }

@@ -55,6 +55,7 @@ class ListaDeCLientesAdapter(
     fun atualiza(clientes: List<Cliente>){
         this.clientes.clear()
         this.clientes.addAll(clientes)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

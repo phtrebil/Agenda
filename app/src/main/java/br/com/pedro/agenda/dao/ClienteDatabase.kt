@@ -13,16 +13,18 @@ abstract class ClienteDatabase : RoomDatabase() {
 
     companion object{
 
-        @Volatile private lateinit var db: ClienteDatabase
+        @Volatile private  var db: ClienteDatabase? = null
         fun instancia(context: Context): ClienteDatabase{
-            if(::db.isInitialized) return db
 
-            db = Room.databaseBuilder(
+            return db ?: databaseBuilder(
                 context,
                 ClienteDatabase::class.java, "Cliente.db"
             ).build()
+                .also {
+                    db = it
+                }
 
-            return db
+
         }
     }
     abstract fun clienteDatabase(): ClienteDao

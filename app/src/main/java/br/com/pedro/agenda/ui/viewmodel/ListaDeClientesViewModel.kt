@@ -12,7 +12,7 @@ class ListaDeClientesViewModel(
         return repository.clienteDatabase().getAll()
     }
 
-    fun delete(cliente: Cliente) {
+    suspend fun delete(cliente: Cliente) {
         repository.clienteDatabase().delete(cliente)
 
     }

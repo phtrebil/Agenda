@@ -13,13 +13,11 @@ import br.com.pedro.agenda.ui.adapter.ListaDeCLientesAdapter
 import br.com.pedro.agenda.ui.viewmodel.ListaDeClientesViewModel
 import br.com.pedro.agenda.ui.viewmodel.factory.ListaDeClientesFactory
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ListaDeClientesActivity : AppCompatActivity() {
 
-    private var listaDeClientes: List<Cliente> = emptyList()
     private val adapter = ListaDeCLientesAdapter(this)
     private val binding by lazy {
         ActivityListaDeClientesBinding.inflate(layoutInflater)
@@ -39,22 +37,11 @@ class ListaDeClientesActivity : AppCompatActivity() {
         configuraFab()
 
         lifecycleScope.launch() {
-            geraLista()
-        }
-
-
-    }
-
-
-    private suspend fun geraLista(): List<Cliente> {
-        withContext(IO) {
-            val clientes = viewModel.getAll()
-            clientes.collect{
+            viewModel.getAll().collect{
                 adapter.atualiza(it)
             }
-
         }
-        return listaDeClientes
+
     }
 
 
@@ -75,7 +62,7 @@ class ListaDeClientesActivity : AppCompatActivity() {
             lifecycleScope.launch() {
                 deletaCliente(it)
             }
-            adapter.atualiza(listaDeClientes)
+
         }
         adapter.quandoClicaItem = {
             val intent = Intent(this, DetalhesActivity::class.java)
@@ -86,9 +73,9 @@ class ListaDeClientesActivity : AppCompatActivity() {
         }
     }
 
-    private suspend fun deletaCliente(it: Cliente) {
+    private suspend fun deletaCliente(cliente: Cliente) {
         withContext(IO) {
-            viewModel.delete(it)
+            viewModel.delete(cliente)
         }
 
     }
