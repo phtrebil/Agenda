@@ -13,7 +13,7 @@ abstract class ClienteDatabase : RoomDatabase() {
 
     companion object{
 
-        private lateinit var db: ClienteDatabase
+        @Volatile private lateinit var db: ClienteDatabase
         fun instancia(context: Context): ClienteDatabase{
             if(::db.isInitialized) return db
 

@@ -38,21 +38,20 @@ class ListaDeClientesActivity : AppCompatActivity() {
         carregaRecyclerView()
         configuraFab()
 
-
-    }
-
-    override fun onResume() {
-        super.onResume()
         lifecycleScope.launch() {
-            val clientes = geraLista()
-            adapter.atualiza(clientes)
+            geraLista()
         }
 
+
     }
+
 
     private suspend fun geraLista(): List<Cliente> {
         withContext(IO) {
-            listaDeClientes = viewModel.getAll()
+            val clientes = viewModel.getAll()
+            clientes.collect{
+                adapter.atualiza(it)
+            }
 
         }
         return listaDeClientes
@@ -90,8 +89,6 @@ class ListaDeClientesActivity : AppCompatActivity() {
     private suspend fun deletaCliente(it: Cliente) {
         withContext(IO) {
             viewModel.delete(it)
-            listaDeClientes = viewModel.getAll()
-            adapter.atualiza(listaDeClientes)
         }
 
     }
