@@ -1,14 +1,9 @@
 package br.com.pedro.agenda.ui.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
-import android.view.View.OnLongClickListener
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
-import br.com.pedro.agenda.dao.ClienteDatabase
 import br.com.pedro.agenda.databinding.ItemListaClientesBinding
 import br.com.pedro.agenda.model.Cliente
 import br.com.pedro.agenda.ui.adapter.ListaDeCLientesAdapter.ViewHolder
@@ -32,7 +27,7 @@ class ListaDeCLientesAdapter(
         private lateinit var cliente: Cliente
 
         init {
-            itemView.setOnLongClickListener(View.OnLongClickListener {
+            itemView.setOnLongClickListener({
                 quandoSeguraItem(cliente)
                 true
             })
