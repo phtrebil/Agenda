@@ -16,12 +16,9 @@ class ListaDeClientesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        vaiParaDetalhes()
-        configuraFab()
-
-
-
     }
+
+
 
     private fun vaiParaDetalhes() {
         adapter.quandoClicaItem = {
