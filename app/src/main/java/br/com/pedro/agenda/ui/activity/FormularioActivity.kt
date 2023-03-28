@@ -69,7 +69,7 @@ class FormularioActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.menu_formulario_salvar -> {
                 criarCliente()
-                startActivity(Intent(baseContext, ListaDeClientesActivity::class.java))
+                startActivity(Intent(baseContext, MainActivity::class.java))
                 true
             }
             else -> return super.onOptionsItemSelected(item)
