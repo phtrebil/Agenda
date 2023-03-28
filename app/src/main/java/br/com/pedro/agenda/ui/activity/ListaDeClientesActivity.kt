@@ -3,14 +3,15 @@ package br.com.pedro.agenda.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import br.com.pedro.agenda.databinding.ActivityListaDeClientesBinding
+import br.com.pedro.agenda.databinding.ActivityBinding
+import br.com.pedro.agenda.model.Cliente
 import br.com.pedro.agenda.ui.adapter.ListaDeCLientesAdapter
 
 class ListaDeClientesActivity : AppCompatActivity() {
 
     private val adapter = ListaDeCLientesAdapter(this)
     private val binding by lazy {
-        ActivityListaDeClientesBinding.inflate(layoutInflater)
+       ActivityBinding.inflate(layoutInflater)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,25 +20,18 @@ class ListaDeClientesActivity : AppCompatActivity() {
     }
 
 
-
-    private fun vaiParaDetalhes() {
-        adapter.quandoClicaItem = {
-            val intent = Intent(this, DetalhesActivity::class.java)
-                .apply {
-                    putExtra("cliente", it)
-                }
-            startActivity(intent)
-        }
-    }
-
-    private fun configuraFab() {
-        binding.fabAdicionaCliente.setOnClickListener {
-            startActivity(Intent(this, FormularioActivity::class.java))
-        }
+    private fun vaiParaDetalhesActivity(it: Cliente) {
+        val intent = Intent(this, DetalhesActivity::class.java)
+            .apply {
+                putExtra("cliente", it)
+            }
+        startActivity(intent)
     }
 
 
-
+    private fun vaiParaFormularioActivity() {
+        startActivity(Intent(this, FormularioActivity::class.java))
+    }
 
 
 }
