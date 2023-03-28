@@ -27,11 +27,11 @@ class ListaDeCLientesAdapter(
         private lateinit var cliente: Cliente
 
         init {
-            itemView.setOnLongClickListener({
+            itemView.setOnLongClickListener {
                 quandoSeguraItem(cliente)
                 true
-            })
-            
+            }
+
             itemView.setOnClickListener {
                 if(::cliente.isInitialized){
                     quandoClicaItem(cliente)

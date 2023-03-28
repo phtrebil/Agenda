@@ -64,7 +64,7 @@ class ListaDeClientesFragment : Fragment() {
 
     private fun configuraFab() {
         fab_adiciona_cliente.setOnClickListener {
-            vaiParaFormularioActivity
+            vaiParaFormularioActivity()
         }
     }
 
@@ -84,7 +84,7 @@ class ListaDeClientesFragment : Fragment() {
         }
 
         adapter.quandoClicaItem = {
-            vaiParaDetalhesActivity
+            vaiParaDetalhesActivity(it)
         }
 
     }
