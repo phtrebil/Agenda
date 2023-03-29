@@ -37,17 +37,15 @@ class ListaDeClientesFragment : Fragment() {
         val provider = ViewModelProviders.of(this, factory)
         provider[ListaDeClientesViewModel::class.java]
     }
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         lifecycleScope.launch {
             viewModel.getAll().collect {
                 adapter.atualiza(it)
             }
         }
     }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -67,7 +65,6 @@ class ListaDeClientesFragment : Fragment() {
             vaiParaFormularioActivity()
         }
     }
-
 
     private fun carregaRecyclerView() {
         val recyclerView = rv_lista_de_alunos
