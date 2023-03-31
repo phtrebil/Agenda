@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun configuraFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container_main_activity, fragment)
+        transaction.add(R.id.container_main_activity, fragment)
         transaction.commit()
     }
 
@@ -47,11 +47,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun vaiParaDetalhesActivity(it: Cliente) {
+    private fun vaiParaDetalhesActivity(cliente: Cliente) {
         val transaction = supportFragmentManager.beginTransaction()
         val fragment = DetalhesFragment()
         val dados = Bundle()
-        dados.putParcelable("cliente", it)
+        dados.putParcelable("cliente", cliente)
         fragment.arguments = dados
         transaction.replace(R.id.container_main_activity, fragment)
         transaction.commit()
