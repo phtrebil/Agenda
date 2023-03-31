@@ -1,7 +1,9 @@
 package br.com.pedro.agenda.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import br.com.pedro.agenda.R
 import br.com.pedro.agenda.model.Cliente
@@ -12,32 +14,36 @@ class DetalhesFragment: Fragment() {
     var vaiParaFormulario: (cliente:Cliente) -> Unit ={}
     private var cliente = Cliente(0, "", "", "","")
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_detalhes, container, false)
+        Log.d("DetalhesFragment", "View inflada: $view")
         val args = arguments
         if (args != null && args.containsKey("cliente")) {
             val clienteRecebido = args.getParcelable<Cliente>("cliente")
             clienteRecebido?.let {
-                preencheCampo(it)
-                cliente = clienteRecebido
+                cliente = it
             }
 
         }
+        preencheCampo(cliente)
 
         return view
     }
 
     private fun preencheCampo(cliente: Cliente) {
-
-            nome.text = cliente.nome
-            endereco.text = cliente.endreco
-            telefone.text = cliente.telefone
-            email.text = cliente.email
-
+        nome.text = cliente.nome
+        endereco.text = cliente.endreco
+        email.text = cliente.email
+        telefone.text = cliente.telefone
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
