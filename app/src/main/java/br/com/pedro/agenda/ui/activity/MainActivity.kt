@@ -8,6 +8,7 @@ import br.com.pedro.agenda.R
 import br.com.pedro.agenda.databinding.ActivityBinding
 import br.com.pedro.agenda.model.Cliente
 import br.com.pedro.agenda.ui.fragments.DetalhesFragment
+import br.com.pedro.agenda.ui.fragments.FormularioFragments
 import br.com.pedro.agenda.ui.fragments.ListaDeClientesFragment
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun configuraFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.container_main_activity, fragment)
+        transaction.replace(R.id.container_main_activity, fragment)
         transaction.commit()
     }
 
@@ -59,14 +60,17 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun vaiParaFormularioActivity() {
-        startActivity(Intent(this, FormularioActivity::class.java))
+        configuraFragment(FormularioFragments())
     }
 
-    private fun vaiParaFormularioPreenchido(it: Cliente) {
-        startActivity(Intent(this, FormularioActivity::class.java)
-            .apply {
-                putExtra("cliente2", it)
-            })
+    private fun vaiParaFormularioPreenchido(cliente: Cliente) {
+        val transaction = supportFragmentManager.beginTransaction()
+        val fragment = FormularioFragments()
+        val dados = Bundle()
+        dados.putParcelable("cliente", cliente)
+        fragment.arguments = dados
+        transaction.replace(R.id.container_main_activity, fragment)
+        transaction.commit()
     }
 
 
