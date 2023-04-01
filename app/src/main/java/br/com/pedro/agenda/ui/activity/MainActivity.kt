@@ -1,6 +1,5 @@
 package br.com.pedro.agenda.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -36,13 +35,19 @@ class MainActivity : AppCompatActivity() {
                 vaiParaDetalhesActivity(it)
             }
             fragment.vaiParaFormularioActivity = {
-                vaiParaFormularioActivity()
+                vaiParaFormularioFragment()
             }
         }
 
         if (fragment is DetalhesFragment) {
             fragment.vaiParaFormulario = {
                 vaiParaFormularioPreenchido(it)
+            }
+        }
+
+        if (fragment is FormularioFragments) {
+            fragment.vaiParaListaDeClientesFragment = {
+                vaiParaListaDeClientesFragment()
             }
         }
 
@@ -59,15 +64,19 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun vaiParaFormularioActivity() {
+    private fun vaiParaFormularioFragment() {
         configuraFragment(FormularioFragments())
+    }
+
+    private fun vaiParaListaDeClientesFragment() {
+        configuraFragment(ListaDeClientesFragment())
     }
 
     private fun vaiParaFormularioPreenchido(cliente: Cliente) {
         val transaction = supportFragmentManager.beginTransaction()
         val fragment = FormularioFragments()
         val dados = Bundle()
-        dados.putParcelable("cliente", cliente)
+        dados.putParcelable("cliente2", cliente)
         fragment.arguments = dados
         transaction.replace(R.id.container_main_activity, fragment)
         transaction.commit()
