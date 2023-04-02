@@ -19,67 +19,75 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        configuraFragment(ListaDeClientesFragment())
+        if(savedInstanceState == null){
+            abreListaNoticias()
+        }
+    }
+
+    private fun abreListaNoticias() {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.container_main_activity, ListaDeClientesFragment())
+        transaction.commit()
     }
 
     private fun configuraFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container_main_activity, fragment)
+        transaction.addToBackStack(null)
         transaction.commit()
     }
 
     override fun onAttachFragment(fragment: androidx.fragment.app.Fragment) {
         super.onAttachFragment(fragment)
-        if (fragment is ListaDeClientesFragment) {
-            fragment.vaiParaDetalhesActivity = {
-                vaiParaDetalhesActivity(it)
-            }
-            fragment.vaiParaFormularioActivity = {
-                vaiParaFormularioFragment()
-            }
-        }
 
-        if (fragment is DetalhesFragment) {
-            fragment.vaiParaFormulario = {
-                vaiParaFormularioPreenchido(it)
+        when(fragment){
+            is ListaDeClientesFragment -> {
+                configuraListaDeClientesFragment(fragment)
             }
-        }
 
-        if (fragment is FormularioFragments) {
-            fragment.vaiParaListaDeClientesFragment = {
-                vaiParaListaDeClientesFragment()
+            is DetalhesFragment -> {
+                configuraDetalhesFragment(fragment)
+            }
+
+            is FormularioFragments -> {
+                configuraFormularioFragment(fragment)
             }
         }
 
     }
 
+    private fun configuraFormularioFragment(fragment: FormularioFragments) {
+        fragment.vaiParaListaDeClientesFragment = this::vaiParaListaDeClientesFragment
+    }
+
+    private fun configuraDetalhesFragment(fragment: DetalhesFragment) {
+        fragment.vaiParaFormulario = this::vaiParaFormularioPreenchido
+    }
+
+    private fun configuraListaDeClientesFragment(fragment: ListaDeClientesFragment) {
+        fragment.vaiParaFormularioActivity = this::vaiParaFormularioFragment
+        fragment.vaiParaDetalhesActivity = this::vaiParaDetalhesActivity
+    }
+
     private fun vaiParaDetalhesActivity(cliente: Cliente) {
-        val transaction = supportFragmentManager.beginTransaction()
         val fragment = DetalhesFragment()
         val dados = Bundle()
         dados.putParcelable("cliente", cliente)
         fragment.arguments = dados
-        transaction.replace(R.id.container_main_activity, fragment)
-        transaction.commit()
+        configuraFragment(fragment)
     }
-
-
     private fun vaiParaFormularioFragment() {
         configuraFragment(FormularioFragments())
     }
-
     private fun vaiParaListaDeClientesFragment() {
         configuraFragment(ListaDeClientesFragment())
     }
-
     private fun vaiParaFormularioPreenchido(cliente: Cliente) {
-        val transaction = supportFragmentManager.beginTransaction()
         val fragment = FormularioFragments()
         val dados = Bundle()
         dados.putParcelable("cliente2", cliente)
         fragment.arguments = dados
-        transaction.replace(R.id.container_main_activity, fragment)
-        transaction.commit()
+        configuraFragment(fragment)
     }
 
 
