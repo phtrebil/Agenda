@@ -18,6 +18,8 @@ import kotlinx.android.synthetic.main.fragments_lista_de_clientes.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 
 class ListaDeClientesFragment : Fragment() {
@@ -31,12 +33,7 @@ class ListaDeClientesFragment : Fragment() {
         } ?: throw java.lang.IllegalArgumentException("Conteto inválido")
     }
 
-    private val viewModel by lazy {
-        val db = ClienteDatabase.instancia(requireContext())
-        val factory = ListaDeClientesFactory(db)
-        val provider = ViewModelProviders.of(this, factory)
-        provider[ListaDeClientesViewModel::class.java]
-    }
+    private val viewModel: ListaDeClientesViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

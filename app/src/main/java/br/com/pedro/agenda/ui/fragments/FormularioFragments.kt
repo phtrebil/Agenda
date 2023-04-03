@@ -4,29 +4,22 @@ import android.os.Bundle
 import android.text.Editable
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import br.com.pedro.agenda.R
-import br.com.pedro.agenda.dao.ClienteDatabase
 import br.com.pedro.agenda.model.Cliente
 import br.com.pedro.agenda.ui.viewmodel.FormularioViewModel
-import br.com.pedro.agenda.ui.viewmodel.factory.FormularioFactory
 import kotlinx.android.synthetic.main.fragments_formulario.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FormularioFragments : Fragment() {
 
     private var cliente = Cliente(0, "", "", "", "")
     var vaiParaListaDeClientesFragment: () -> Unit = {}
 
-    private val viewModel by lazy {
-        val db = ClienteDatabase.instancia(requireContext())
-        val factory = FormularioFactory(db)
-        val provider = ViewModelProviders.of(this, factory)
-        provider.get(FormularioViewModel::class.java)
-    }
+    private val viewModel: FormularioViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +56,7 @@ class FormularioFragments : Fragment() {
         telefone_add_cliente.text = cliente.telefone.toEditable()
     }
 
-    fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
+    private fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         val inflate: MenuInflater = inflater
@@ -89,7 +82,7 @@ class FormularioFragments : Fragment() {
         val endereco = edereco_add_cliente.text.toString()
         val email = email_add_cliente.text.toString()
         var telefone = telefone_add_cliente.text.toString()
-        lifecycleScope.launch() {
+        lifecycleScope.launch {
             salvaCliente(nome, endereco, email, telefone)
 
         }
