@@ -17,6 +17,9 @@ Funcionalidades
 - Room (biblioteca de persistência de dados)
 - MVVM (Model-View-ViewModel)
 - RecyclerView (para exibição dos contatos na tela)
+- fragments
+- coroutines
+- flow
 - Koin (para injeção de dependência)
 
 <h3>Como utilizar</h3>
