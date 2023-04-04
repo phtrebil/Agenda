@@ -35,10 +35,6 @@ Algumas possíveis melhorias para o projeto incluem:
 
 Contribuições são sempre bem-vindas! Se você encontrar algum bug ou tiver uma ideia de melhoria, sinta-se à vontade para abrir uma issue ou enviar um pull request.
 
-<h3> Licença</h3>
-
-Este projeto é licenciado sob a licença MIT. Consulte o arquivo LICENSE para obter mais informações.
-
 
 <h1 align="center"> Vitrine.dev </h1>
 
