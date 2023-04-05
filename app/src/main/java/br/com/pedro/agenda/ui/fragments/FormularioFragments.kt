@@ -16,8 +16,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FormularioFragments : Fragment() {
 
+
     private var cliente = Cliente(0, "", "", "", "")
     var vaiParaListaDeClientesFragment: () -> Unit = {}
+    var adicionaImagemGaleria: () -> Unit = {}
 
     private val viewModel: FormularioViewModel by viewModel()
 
@@ -46,6 +48,13 @@ class FormularioFragments : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         preencheCampo(cliente)
+        clicaNaImagem()
+    }
+
+    private fun clicaNaImagem() {
+        imagem_add_cliente.setOnClickListener{
+            adicionaImagemGaleria()
+        }
     }
 
 
