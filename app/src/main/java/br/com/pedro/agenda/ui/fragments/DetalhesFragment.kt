@@ -3,6 +3,7 @@ package br.com.pedro.agenda.ui.fragments
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import br.com.pedro.agenda.R
 import br.com.pedro.agenda.model.Cliente
 import kotlinx.android.synthetic.main.detalhes.*
@@ -10,9 +11,10 @@ import kotlinx.android.synthetic.main.detalhes.*
 
 class DetalhesFragment : Fragment() {
 
-
-    var vaiParaFormulario: (cliente: Cliente) -> Unit = {}
     private var cliente = Cliente(0, "", "", "", "")
+    private val controlador by lazy {
+        findNavController()
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,6 +73,12 @@ class DetalhesFragment : Fragment() {
             else -> super.onOptionsItemSelected(item)
         }
 
+    }
+
+    private fun vaiParaFormulario(cliente: Cliente) {
+        val dados = Bundle()
+        dados.putParcelable("cliente2", cliente)
+        controlador.navigate(R.id.action_detalhes_to_formulario, dados)
     }
 
 }

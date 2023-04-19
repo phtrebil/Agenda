@@ -5,6 +5,7 @@ import android.text.Editable
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import br.com.pedro.agenda.R
 import br.com.pedro.agenda.model.Cliente
 import br.com.pedro.agenda.ui.viewmodel.FormularioViewModel
@@ -18,8 +19,9 @@ class FormularioFragments : Fragment() {
 
 
     private var cliente = Cliente(0, "", "", "", "")
-    var vaiParaListaDeClientesFragment: () -> Unit = {}
-    var adicionaImagemGaleria: () -> Unit = {}
+    private val controlador by lazy {
+        findNavController()
+    }
 
     private val viewModel: FormularioViewModel by viewModel()
 
@@ -48,14 +50,8 @@ class FormularioFragments : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         preencheCampo(cliente)
-        clicaNaImagem()
     }
 
-    private fun clicaNaImagem() {
-        imagem_add_cliente.setOnClickListener{
-            adicionaImagemGaleria()
-        }
-    }
 
 
     private fun preencheCampo(cliente: Cliente) {
@@ -84,6 +80,10 @@ class FormularioFragments : Fragment() {
             else -> return super.onOptionsItemSelected(item)
         }
 
+    }
+
+    private fun vaiParaListaDeClientesFragment() {
+        controlador.navigate(R.id.action_formulario_to_listaDeClientes)
     }
 
     private fun criarCliente() {
