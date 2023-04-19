@@ -82,7 +82,7 @@ class ListaDeClientesFragment : Fragment() {
         adapter.quandoClicaItem = {
             val dados = Bundle()
             dados.putParcelable("cliente", it)
-            controlador.navigate(R.id.action_listaDeClientesFragment_to_detalhesFragment, dados)
+            controlador.navigate(R.id.action_listaDeClientes_to_detalhes, dados)
         }
 
     }

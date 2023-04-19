@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navi_graph"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/listaDeClientes">
 
     <fragment
@@ -12,11 +12,8 @@
         tools:layout="@layout/fragments_lista_de_clientes"
         >
         <action
-            android:id="@+id/action_listaDeClientesFragment_to_detalhesFragment"
+            android:id="@+id/action_listaDeClientes_to_detalhes"
             app:destination="@id/detalhes" />
-        <argument
-            android:name="cliente"
-            app:argType="Cliente" />
         <action
             android:id="@+id/action_listaDeClientes_to_formulario"
             app:destination="@id/formulario" />
@@ -27,7 +24,7 @@
         android:label="DetalhesFragment"
         tools:layout="@layout/detalhes">
         <action
-            android:id="@+id/action_detalhesFragment_to_formularioFragments"
+            android:id="@+id/action_detalhes_to_formulario"
             app:destination="@id/formulario" />
     </fragment>
     <fragment
@@ -37,7 +34,7 @@
         tools:layout="@layout/fragments_formulario"
         >
         <action
-            android:id="@+id/action_formularioFragments_to_listaDeClientesFragment"
+            android:id="@+id/action_formulario_to_listaDeClientes"
             app:destination="@id/listaDeClientes" />
     </fragment>
 </navigation>

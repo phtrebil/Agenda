@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import br.com.pedro.agenda.R
 
-class MainActivity : AppCompatActivity() {
+class Activity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
