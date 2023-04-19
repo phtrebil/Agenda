@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navi_graph"
+    app:startDestination="@id/listaDeClientes">
+
+    <fragment
+        android:id="@+id/listaDeClientes"
+        android:name="br.com.pedro.agenda.ui.fragments.ListaDeClientesFragment"
+        android:label="Lista De Clientes"
+        tools:layout="@layout/fragments_lista_de_clientes"
+        >
+        <action
+            android:id="@+id/action_listaDeClientesFragment_to_detalhesFragment"
+            app:destination="@id/detalhes" />
+        <argument
+            android:name="cliente"
+            app:argType="Cliente" />
+        <action
+            android:id="@+id/action_listaDeClientes_to_formulario"
+            app:destination="@id/formulario" />
+    </fragment>
+    <fragment
+        android:id="@+id/detalhes"
+        android:name="br.com.pedro.agenda.ui.fragments.DetalhesFragment"
+        android:label="DetalhesFragment"
+        tools:layout="@layout/detalhes">
+        <action
+            android:id="@+id/action_detalhesFragment_to_formularioFragments"
+            app:destination="@id/formulario" />
+    </fragment>
+    <fragment
+        android:id="@+id/formulario"
+        android:name="br.com.pedro.agenda.ui.fragments.FormularioFragments"
+        android:label="FormularioFragments"
+        tools:layout="@layout/fragments_formulario"
+        >
+        <action
+            android:id="@+id/action_formularioFragments_to_listaDeClientesFragment"
+            app:destination="@id/listaDeClientes" />
+    </fragment>
+</navigation>

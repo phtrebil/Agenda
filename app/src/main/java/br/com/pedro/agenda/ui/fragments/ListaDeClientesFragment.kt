@@ -5,32 +5,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.pedro.agenda.R
-import br.com.pedro.agenda.dao.ClienteDatabase
 import br.com.pedro.agenda.model.Cliente
 import br.com.pedro.agenda.ui.adapter.ListaDeCLientesAdapter
 import br.com.pedro.agenda.ui.viewmodel.ListaDeClientesViewModel
-import br.com.pedro.agenda.ui.viewmodel.factory.ListaDeClientesFactory
 import kotlinx.android.synthetic.main.fragments_lista_de_clientes.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
 
 class ListaDeClientesFragment : Fragment() {
-
-    var vaiParaDetalhesActivity: (cliente: Cliente) -> Unit = {}
-    var vaiParaFormularioActivity: () -> Unit = {}
 
     private val adapter by lazy {
         context?.let {
             ListaDeCLientesAdapter(it)
         } ?: throw java.lang.IllegalArgumentException("Conteto inválido")
+    }
+
+    private val controlador by lazy {
+        findNavController()
     }
 
     private val viewModel: ListaDeClientesViewModel by viewModel()
@@ -63,6 +61,10 @@ class ListaDeClientesFragment : Fragment() {
         }
     }
 
+    private fun vaiParaFormularioActivity() {
+        controlador.navigate(R.id.action_listaDeClientes_to_formulario)
+    }
+
     private fun carregaRecyclerView() {
         val recyclerView = rv_lista_de_alunos
         recyclerView.adapter = adapter
@@ -78,7 +80,9 @@ class ListaDeClientesFragment : Fragment() {
         }
 
         adapter.quandoClicaItem = {
-            vaiParaDetalhesActivity(it)
+            val dados = Bundle()
+            dados.putParcelable("cliente", it)
+            controlador.navigate(R.id.action_listaDeClientesFragment_to_detalhesFragment, dados)
         }
 
     }
