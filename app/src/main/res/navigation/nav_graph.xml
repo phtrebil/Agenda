@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_detalhes_to_formulario"
             app:destination="@id/formulario" />
+        <argument
+            android:name="cliente"
+            app:argType="br.com.pedro.agenda.model.Cliente" />
 
     </fragment>
     <fragment
@@ -38,5 +41,8 @@
         <action
             android:id="@+id/action_formulario_to_listaDeClientes"
             app:destination="@id/listaDeClientes" />
+        <argument
+            android:name="cliente2"
+            app:argType="br.com.pedro.agenda.model.Cliente" />
     </fragment>
 </navigation>

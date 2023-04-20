@@ -76,9 +76,9 @@ class DetalhesFragment : Fragment() {
     }
 
     private fun vaiParaFormulario(cliente: Cliente) {
-        val dados = Bundle()
-        dados.putParcelable("cliente2", cliente)
-        controlador.navigate(R.id.action_detalhes_to_formulario, dados)
+        val direcao =
+            DetalhesFragmentDirections.actionDetalhesToFormulario(cliente)
+        controlador.navigate(direcao)
     }
 
 }
